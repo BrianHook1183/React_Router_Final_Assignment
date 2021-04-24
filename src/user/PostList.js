@@ -1,11 +1,12 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 
 import Post from "./Post";
 import PostLink from "./PostLink";
 import NoPostSelectedMessage from "./NoPostSelectedMessage";
 
 /*
-  TODO: Update the below so that the components show on the appropriate route.
+  (x)TODO: Update the below so that the components show on the appropriate route.
 
   The <NoPostSelectedMessage /> component should show up on the following route:
   /users/:userId/posts
@@ -25,8 +26,14 @@ export const PostList = ({ posts }) => {
         <ul className="list-group">{postLinks}</ul>
       </div>
       <div className="col-9">
-        <NoPostSelectedMessage />
-        <Post posts={posts} />
+        <Switch>
+          <Route path="/users/:userId/posts/:postId">
+            <Post posts={posts} />
+          </Route>
+          <Route path="/users/:userId/posts">
+            <NoPostSelectedMessage />
+          </Route>
+        </Switch>
       </div>
     </div>
   );
