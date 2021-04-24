@@ -66,10 +66,10 @@ export const User = () => {
         {user.id ? (
           <div className="p-4 border border-top-0">
             <Switch>
-              <Route path="/users/:userId/posts">
+              <Route path={`${url}/posts`}>
                 <PostList posts={user.posts} />
               </Route>
-              <Route path="/users/:userId">
+              <Route path={`${url}/`}>
                 <UserProfile user={user} />
               </Route>
             </Switch>
