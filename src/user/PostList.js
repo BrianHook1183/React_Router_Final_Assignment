@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 import Post from "./Post";
 import PostLink from "./PostLink";
@@ -16,6 +16,7 @@ import NoPostSelectedMessage from "./NoPostSelectedMessage";
 */
 
 export const PostList = ({ posts }) => {
+  const { url } = useRouteMatch();
   const postLinks = posts.map((post) => (
     <PostLink key={post.id} userId={post.userId} post={post} />
   ));
@@ -27,10 +28,10 @@ export const PostList = ({ posts }) => {
       </div>
       <div className="col-9">
         <Switch>
-          <Route path="/users/:userId/posts/:postId">
+          <Route path={`${url}/:postId`}>
             <Post posts={posts} />
           </Route>
-          <Route path="/users/:userId/posts">
+          <Route path={`${url}`}>
             <NoPostSelectedMessage />
           </Route>
         </Switch>
