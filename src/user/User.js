@@ -20,7 +20,7 @@ export const User = () => {
     return () => abortController.abort();
   }, [userId]);
 
-  // TODO: Change the link below to go back to the home page.
+  // (x)TODO: Change the link below to go back to the home page.
 
   if (error) {
     return (
