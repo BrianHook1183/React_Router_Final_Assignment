@@ -1,11 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 import { deletePost } from "../api";
 
 import NoPostSelectedMessage from "./NoPostSelectedMessage";
 
 export const Post = ({ posts }) => {
-  const postId = 1; // TODO: This ID will need to be pulled from parameters.
+  const { postId } = useParams(); // (x)TODO: This ID will need to be pulled from parameters.
   const post = posts.find((post) => post.id === Number(postId));
 
   const handleDelete = async (id) => {
