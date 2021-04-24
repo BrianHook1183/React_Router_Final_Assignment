@@ -39,7 +39,7 @@ export const User = () => {
 
     You'll need to add nested routes below.
 
-    TODO The <PostList /> component should show on the following route:
+    (x)TODO The <PostList /> component should show on the following route:
     /users/:userId/posts
 
     (x)TODO The <UserProfile /> component should show on the following route:
