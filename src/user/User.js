@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Switch, Route, useRouteMatch } from "react-router-dom";
 import UserProfile from "./UserProfile";
 import { fetchUserWithPosts } from "../api";
 import PostList from "./PostList";
@@ -10,6 +10,8 @@ export const User = () => {
   const [user, setUser] = useState({ posts: [] });
   const [error, setError] = useState(undefined);
   const { userId } = useParams(); // (x)TODO: This ID will need to be pulled from parameters.
+  const { url } = useRouteMatch();
+
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -33,14 +35,14 @@ export const User = () => {
   }
 
   /*
-    TODO: In the below section, update the links to work appropriately with React Router.
+    In the below section, update the links to work appropriately with React Router.
 
-    TODO: You'll need to add nested routes below.
+    You'll need to add nested routes below.
 
-    The <PostList /> component should show on the following route:
+    TODO The <PostList /> component should show on the following route:
     /users/:userId/posts
 
-    The <UserProfile /> component should show on the following route:
+    (x)TODO The <UserProfile /> component should show on the following route:
     /users/:userId
   */
   return (
@@ -50,17 +52,27 @@ export const User = () => {
         <h2 className="mb-3">{user.name}</h2>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <a className="nav-link">Profile</a>
+            <Link to={`${url}`} className="nav-link">
+              Profile
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link">Posts</a>
+            <Link to={`${url}/posts`} className="nav-link">
+              Posts
+            </Link>
           </li>
         </ul>
 
         {user.id ? (
           <div className="p-4 border border-top-0">
-            <PostList posts={user.posts} />
-            <UserProfile user={user} />
+            <Switch>
+              <Route path="/users/:userId/posts">
+                <PostList posts={user.posts} />
+              </Route>
+              <Route path="/users/:userId">
+                <UserProfile user={user} />
+              </Route>
+            </Switch>
           </div>
         ) : (
           <div className="p-4 border border-top-0">
